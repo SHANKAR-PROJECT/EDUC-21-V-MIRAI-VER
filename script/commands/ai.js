@@ -27,7 +27,7 @@ module.exports.run = async function ({ api, event, args }) {
         const { response: result } = response.data;
 
         const userNames = await getUserNames(api, event.senderID);
-        const responseMessage = `${result}\n\n👤 Question Asked By: ${userNames.join(', ')}`;
+        const responseMessage = `𝗖𝗛𝗔𝗧𝗚𝗣𝗧\n━━━━━━━━━━━━━━━━━━\n\n${result}\n\n👤 Question Asked By: ${userNames.join(', ')}`;
 
         api.editMessage(responseMessage, waitMessage.messageID, event.threadID, event.messageID);
     } catch (error) {
