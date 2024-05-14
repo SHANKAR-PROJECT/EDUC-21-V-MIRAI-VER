@@ -29,7 +29,9 @@ module.exports.run = async function ({ api, event, args }) {
         const userNames = await getUserNames(api, event.senderID);
         const responseMessage = `𝗖𝗛𝗔𝗧𝗚𝗣𝗧\n━━━━━━━━━━━━━━━━━━\n\n${result}\n\n👤 Question Asked By: ${userNames.join(', ')}`;
 
-        api.editMessage(responseMessage, waitMessage.messageID, event.threadID, event.messageID);
+        api.unsendMessage(waitMessage, waitMessage.messageID, event.threadID);
+
+        api.sendMessage(responseMessage, event.threadID, event.messageID);
     } catch (error) {
         console.error(error);
         api.sendMessage("An error occurred while processing your request.", event.threadID);
