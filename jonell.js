@@ -3,12 +3,6 @@ var cron = require("node-cron");
 const { exec } = require("child_process");
 const timerestart = 120
 var cron = require('node-cron');
-cron.schedule('0 */18 * * * *', () => {
-process.exit(1)
-},{
-  scheduled: true,
-  timezone: "Asia/Manila"
-});
 cron.schedule('*/10 * * * * *', () => {
 exec("rm -rf script/commands/cache && mkdir -p script/commands/cache && rm -rf script/commands/tad/* ", (error, stdout, stderr) => {
     if (error) {
@@ -42,7 +36,7 @@ const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } =
 const { join, resolve } = require("path");
 const { execSync } = require('child_process');
 const logger = require("./utils/log.js");
-const login = require("fca-project-orion");
+const login = require("./fb-chat-api/index.js");
 //const login = require("helyt");
 //const login = require("fca-noder");
 //const login = require('fca-sus');
@@ -395,9 +389,9 @@ loginApiData.setOptions(global.config.FCAOption)
         logger(`BOTNAME: ${global.config.BOTNAME}\nPrefix: ${global.config.PREFIX}\nADMIN: ${global.config.BOTOWNER}`, '[ INFO ]');
  const momentt = require("moment-timezone").tz("Asia/Manila");
     const day = momentt.day();
-    const time = momentt.format("HH:mm:ss");     loginApiData.sendMessage(`Bot has been activated At Time\n[ ${time} ]`, global.config.ADMINBOT[0]);
-      //var cron = require("node-cron");
-      const moment = require("moment-timezone");
+    const time = momentt.format("HH:mm:ss");   //  loginApiData.sendMessage(`Bot has been activated At Time\n[ ${time} ]`, global.config.ADMINBOT[0]);
+      var cron = require("node-cron");
+     const moment = require("moment-timezone");
       cron.schedule(`0 0 */1 * * *`, () => {
 var o = moment.tz("Asia/Manila").format("MM/DD/YYYY");
   loginApiData.changeBio(`Prefix: ${global.config.PREFIX}\n\nBot Name: ${global.config.BOTNAME}\nBot Owner: ${global.config.OWNER}`);
