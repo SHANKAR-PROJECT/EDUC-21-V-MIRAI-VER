@@ -356,7 +356,7 @@ function login(loginData, options, callback) {
 		listenTyping: false,
 		updatePresence: false,
 		forceLogin: false,
-		autoMarkDelivery: true,
+		autoMarkDelivery: false,
 		autoMarkRead: false,
 		autoReconnect: true,
 		logRecordSize: defaultLogRecordSize,
