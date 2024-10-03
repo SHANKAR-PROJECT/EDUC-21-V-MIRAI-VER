@@ -1,9 +1,14 @@
 const chalk = require('chalk');
-const gradient = require('gradient-string');
 
-const gradientBold = gradient(['blue', 'green', 'white']).multiline;
+async function getGradient() {
+    const gradient = await import('gradient-string');
+    return gradient.default; // .default ko use karen kyunki `gradient-string` ek ES module hai.
+}
 
-module.exports = (data, option) => {
+module.exports = async (data, option) => {
+    const gradient = await getGradient();
+    const gradientBold = gradient(['blue', 'green', 'white']).multiline;
+
     switch (option) {
         case "warn":
             console.log(chalk.bold.hex("#FFA500")(gradientBold('[ Warning ] » \n') + data));
@@ -18,7 +23,10 @@ module.exports = (data, option) => {
     }
 }
 
-module.exports.loader = (data, option) => {
+module.exports.loader = async (data, option) => {
+    const gradient = await getGradient();
+    const gradientBold = gradient(['blue', 'green', 'white']).multiline;
+
     switch (option) {
         case "success":
             console.log(chalk.bold.hex("#90EE90")(gradientBold('[ JONELL CC ] ❯ \n') + data));
@@ -34,4 +42,4 @@ module.exports.loader = (data, option) => {
             console.log(gradText);
             break;
     }
-} 
+}
